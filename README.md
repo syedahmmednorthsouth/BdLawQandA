@@ -41,10 +41,10 @@ processor = PreProcessor(
 
 
 
- Start Elastic Search 
+## Start Elastic Search 
 
    
- 
+```python
 import os
 from subprocess import Popen, PIPE, STDOUT
 
@@ -61,12 +61,16 @@ from haystack.document_stores import ElasticsearchDocumentStore
 Connect to Elasticsearch
 document_store = ElasticsearchDocumentStore(host="localhost", username="", password="", index="document")
 
+```
+
 
 
  
 
-Retriever
+## Retriever
 The Retriever is a lightweight filter that can quickly go through the full document store and pass on a set of candidate documents that are relevant to the query. When used in combination with a Reader, it is a tool for sifting out irrelevant documents, saving the Reader from doing more work than it needs to and speeding up the querying process
+
+```python
 	
 retriever = DensePassageRetriever(
     document_store=document_store,
@@ -79,15 +83,16 @@ retriever = DensePassageRetriever(
     embed_title=True,
     use_fast_tokenizers=True,
 )
+```
 
 
 
 
-
-Reader 
+## Reader 
 	I actually use here some well known pretrained model from hugging face.
 	
 
+```python
 reader = FARMReader(model_name_or_path="deepset/roberta-base-squad2", use_gpu=True)
 
 
@@ -96,11 +101,13 @@ reader = TransformersReader(model_name_or_path="distilbert-base-uncased-distille
 
 reader = TransformersReader(model_name_or_path="deepset/xlm-roberta-large-squad2", tokenizer="deepset/xlm-roberta-large-squad2", use_gpu=-1)
 
+```
 
 
 
+## Final Pipeline
 
-Final Pipeline
+```python
 from haystack.pipelines import ExtractiveQAPipeline
 
 pipe = ExtractiveQAPipeline(reader, retriever)
@@ -111,14 +118,14 @@ pipe = ExtractiveQAPipeline(reader, retriever)
 q = "who has the right to transfer a judge from one high court to another high court?"
 
 prediction = pipe.run(query=q, params={"Reader": {"top_k": 5}})
-
+```
  
 
 	
 	
  
  
-Conclusion
+## Conclusion
 The result is satisfactory in a sense that they actually give us most of the time correct result.Though we want to get the meaningful answer within a range of two - three line sentences , because it will then be relevant to whom we are actually using the model .   Training a model from a squad like question and answer dataset with large number of 
 Question and answers will give us better sequential answers , but regarding Bangladesh Constitution and Penal code , there are few many QA I can find from the internet. If a professional in this domain helps us to make large amounts of QnA , then we can build that kind of model , that really helps users to know their query in legal domain
  
