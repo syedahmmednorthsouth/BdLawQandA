@@ -15,6 +15,7 @@ Haystack is an open-source framework for building search systems that work intel
 ## Dataset Screenshot:
  
 ## Model Plan :
+![Screenshot](Screenshot 2022-10-21 194214.jpg)
 
 
 ## Document Preprocessor :
