@@ -4,22 +4,22 @@ Question Answering can be used in a variety of use cases. A very common one: Usi
 
 A "knowledge base" could for example be your website, an internal wiki or a collection of financial reports. 
 
- Project Proposal
+## Project Proposal
 The objective of this project is to make a model for a system where users can ask questions in legal domain(such as constitution related query and law related query) and the system try to answer   at a good accuray .  Specifically , this project focuses on the Constitution of Bangladesh , Penal Code Of Bangladesh  . The model uses NLP techniques to process the textual data from the documents and some pretrained model to understand the question and a searching query technique to find the meaningful answers
 
- Used Framework- Haystack:
+## Used Framework- Haystack:
 
 Haystack is an open-source framework for building search systems that work intelligently over large document collections. Recent advances in NLP have enabled the application of question answering, retrieval and summarization to real world settings and Haystack is designed to be the bridge between research and industry
 
 
- Dataset Screenshot:
+## Dataset Screenshot:
  
-Model Plan :
+## Model Plan :
 
 
- Document Preprocessor :
+## Document Preprocessor :
 
-
+```python
 from haystack.nodes import PreProcessor
 
 doc = converter.convert(file_path=file, meta=None)
@@ -32,6 +32,7 @@ processor = PreProcessor(
     split_respect_sentence_boundary=True,
     split_overlap=0
 )
+```
 		
 
 
